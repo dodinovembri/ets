@@ -13,30 +13,30 @@
 
 # Description
 This specification is used to calculate price.
-## Product Type Code 1 (Flight)
-### Data Received
-- Data Received
+## Calculate Flight Price
+- Conditional
+    - [ ] When Product Type Code 1 (Flight)
+- Parameters
     - [ ] Agent Id: the corresponding Agent Id
     - [ ] Corporate Id: the corresponding Corporate Id
     - [ ] Product Type Code: the corresponding Product Type Code
+    - [ ] Is Self Booking Tool: the corresponding Is Self Booking Tool
     - [ ] City Id: the corresponding City Id
     - [ ] Airline Code: the corresponding Airline Code
     - [ ] Supplier Type Id: the corresponding Supplier Type Id
-    - [ ] Partner Price:
-        - [ ] Flight Price: the corresponding Partner Flight Price
-        - [ ] Seat Price: the corresponding Partner Price
-        - [ ] Add Ons Price: the corresponding Partner Price
     - [ ] Number of Travelers: the corresponding Number of Travelers
-    - [ ] Supplier Type Id: the Supplier Type Id
+    - [ ] Partner Price: the corresponding Partner Price
+    - [ ] Partner Price Exclude Tax: the corresponding Partner Price Exclude Tax
+    - [ ] Is Air Component: the corresponding Is Air Component
 ### Pricing Component
 - Check Service Fee
     - [ ] Get Service Fee from function Check Service Fee (refer to specification Check Service Fee)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Flight Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Flight Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Flight Search Criteria.Product Type Code
-        - [ ] Is Self Booking Tool: Get Is Self Booking Tool from Flight Reservation.Is Self Booking Tool
-        - [ ] City Id: Get City Id from Flight Search Criteria.Origin Destination.Destination Location.City Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] Is Self Booking Tool: the corresponding Is Self Booking Tool
+        - [ ] City Id: the corresponding City Id
         - [ ] Supplier Type Id: the corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Service Fee Category Id
@@ -63,11 +63,11 @@ This specification is used to calculate price.
 - Check Markup
     - [ ] Get Markup from function Check Markup (refer to specification Check Mark Up)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Flight Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Flight Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Flight Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Flight Search Criteria.Origin Destination.Destination Location.City Id
-        - [ ] Airline Code: the Airline Code from Airline on Itinerary
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
+        - [ ] Airline Code: the corresponding Airline Code
         - [ ] Supplier Type Id: the corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Markup Category Id
@@ -92,10 +92,10 @@ This specification is used to calculate price.
 - Check Processing Fee
     - [ ] Get Processing Fee from function Check Processing Fee (refer to specification Check Processing Fee)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Flight Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Flight Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Flight Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Flight Search Criteria.Origin Destination.Destination Location.City Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
         - [ ] Supplier Type Id: The corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Processing Fee Category Id
@@ -122,10 +122,10 @@ This specification is used to calculate price.
 - Check Tax
     - [ ] Get Tax from function Check Tax (refer to specification Check Tax)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Flight Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Flight Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Flight Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Flight Search Criteria.Origin Destination.Destination Location.City Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
     - [ ] Read Function Return
         - [ ] Tax Category Id
         - [ ] Tax Category Code
@@ -146,7 +146,7 @@ This specification is used to calculate price.
                 - [ ] Charge Type Id
                 - [ ] Charge Type Code
                 - [ ] Charge Type Name
-### Calculate
+### Calculate Price
 - [ ] If Service Fee Rate is not empty
     - [ ] If Service Fee Included is true
         - [ ] If Service Fee Rate.Percent is not empty
@@ -155,7 +155,7 @@ This specification is used to calculate price.
             - [ ] Else
                 - [ ] Service Fee: Partner Price Exclude Tax * (Service Fee Rate.Percent/ 100)
         - [ ] Else If Service Fee Rate.Amount is not empty
-            - [ ] If Flight Price
+            - [ ] If Is Air Component is true
                 - [ ] If Service Fee Rate.Charge Type.Code 26 (Per reservation/booking)
                     - [ ] Service Fee: Service Fee Rate.Amount/ Number of Travelers
                 - [ ] Else If Service Fee Rate.Charge Type.Code 1001 (Per ticket)
@@ -169,7 +169,7 @@ This specification is used to calculate price.
         - [ ] Else
             - [ ] Markup: Partner Price Exclude Tax * (Markup Rate.Percent/ 100)
     - [ ] Else If Markup Rate.Amount is not empty
-        - [ ] If Flight Price
+        - [ ] If Is Air Component is true
             - [ ] If Markup Rate.Charge Type.Code 26 (Per reservation/booking)
                 - [ ] Markup: Markup Rate.Amount/ Number of Travelers
             - [ ] Else If Markup Rate.Charge Type.Code 1001 (Per ticket)
@@ -187,7 +187,7 @@ This specification is used to calculate price.
                     - [ ] Else
                         - [ ] Processing Fee: Partner Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else If Processing Fee Rate.Amount is not empty
-                    - [ ] If Flight Price
+                    - [ ] If Is Air Component is true
                         - [ ] If Processing Fee Rate.Charge Type.Code 26 (Per reservation/booking)
                             - [ ] Processing Fee: Processing Fee Rate.Amount/ Number of Travelers
                         - [ ] Else If Processing Fee Rate.Charge Type.Code 1001 (Per ticket)
@@ -219,7 +219,7 @@ This specification is used to calculate price.
                     - [ ] Else
                         - [ ] After Office Charge: Partner Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else If Processing Fee Rate.Amount is not empty
-                    - [ ] If Flight Price
+                    - [ ] If Is Air Component is true
                         - [ ] If Processing Fee Rate.Charge Type.Code 26 (Per reservation/booking)
                             - [ ] After Office Charge: Processing Fee Rate.Amount/ Number of Travelers
                         - [ ] Else If Processing Fee Rate.Charge Type.Code 1001 (Per ticket)
@@ -238,7 +238,7 @@ This specification is used to calculate price.
                     - [ ] Else
                         - [ ] MDR Fee: Partner Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else If Processing Fee Rate.Amount is not empty
-                    - [ ] If Flight Price
+                    - [ ] If Is Air Component is true
                         - [ ] If Processing Fee Rate.Charge Type.Code 26 (Per reservation/booking)
                             - [ ] MDR Fee: Processing Fee Rate.Amount/ Number of Travelers
                         - [ ] Else If Processing Fee Rate.Charge Type.Code 1001 (Per ticket)
@@ -268,34 +268,32 @@ This specification is used to calculate price.
     - [ ] Else If Tax Rate.Amount is not empty
         - [ ] Flight Price: Flight Price + Tax Rate.Amount
 #### Return 
-- If Flight Price
-    - [ ] Flight Price: the Flight Price
-    - [ ] Flight Price Exclude Tax: the Flight Price Exclude Tax
-- Else
-    - [ ] Price: the Flight Price
-    - [ ] Price Exclude Tax: the Flight Price Exclude Tax
-## Product Type Code 2 (Hotel)
-### Data Received
-- Data Received
+- [ ] Price: the Flight Price
+- [ ] Price Exclude Tax: the Flight Price Exclude Tax
+## Calculate Hotel Price
+- Conditional
+    - [ ] When Product Type Code 2 (Hotel)
+- Parameters
     - [ ] Agent Id: the corresponding Agent Id
     - [ ] Corporate Id: the corresponding Corporate Id
     - [ ] Product Type Code: the corresponding Product Type Code
+    - [ ] Is Self Booking Tool: the corresponding Is Self Booking Tool
     - [ ] City Id: the corresponding City Id
     - [ ] Supplier Type Id: the corresponding Supplier Type Id
-    - [ ] Partner Price Per Night: the corresponding Partner Price Per Night
-    - [ ] Partner Price Per Night Exclude Tax: the corresponding Partner Price Per Night Exclude Tax
     - [ ] Number of Staying Dates: the corresponding Number of Staying Dates
     - [ ] Number of Rooms: the corresponding Number of Rooms
-    - [ ] Supplier Type Id: the corresponding Supplier Type Id 
+    - [ ] Partner Price Per Night: the corresponding Partner Price Per Night
+    - [ ] Partner Price Per Night Exclude Tax: the corresponding Partner Price Per Night Exclude Tax
+    - [ ] Is Room Component: the corresponding Is Room Component
 ### Pricing Component
 - Check Markup
     - [ ] Get Markup from function Check Markup (refer to specification Check Mark Up)
     - [ ] Data to Send 
-        - [ ] Agent Id: Get Agent Id from Hotel Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Hotel Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Hotel Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Hotel Search Criteria.City Id
-        - [ ] Supplier Type Id: The corresponding Supplier Type Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
+        - [ ] Supplier Type Id: the corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Markup Category Id
         - [ ] Markup Category Name
@@ -319,12 +317,12 @@ This specification is used to calculate price.
 - Check Service Fee
     - [ ] Get Service Fee from function Check Service Fee (refer to specification Check Service Fee)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Hotel Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Hotel Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Hotel Search Criteria.Product Type Code
-        - [ ] Is Self Booking Tool: Get Is Self Booking Tool from Hotel Reservation.Is Self Booking Tool
-        - [ ] City Id: Get City Id from Hotel Search Criteria.City Id
-        - [ ] Supplier Type Id: The corresponding Supplier Type Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] Is Self Booking Tool: the corresponding Is Self Booking Tool
+        - [ ] City Id: the corresponding City Id
+        - [ ] Supplier Type Id: the corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Service Fee Category Id
         - [ ] Service Fee Category Name
@@ -350,11 +348,11 @@ This specification is used to calculate price.
 - Check Processing Fee
     - [ ] Get Processing Fee from function Check Processing Fee (refer to specification Check Processing Fee)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Hotel Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Hotel Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Hotel Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Hotel Search Criteria.City Id
-        - [ ] Supplier Type Id: The corresponding Supplier Type Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
+        - [ ] Supplier Type Id: the corresponding Supplier Type Id
     - [ ] Read Function Return
         - [ ] Processing Fee Category Id
         - [ ] Processing Fee Category Name
@@ -380,10 +378,10 @@ This specification is used to calculate price.
 - Check Tax
     - [ ] Get Tax from function Check Tax (refer to specification Check Tax)
     - [ ] Data to Send
-        - [ ] Agent Id: Get Agent Id from Hotel Reservation.Agent Id
-        - [ ] Corporate Id: Get Corporate Id from Hotel Reservation.Corporate Id
-        - [ ] Product Type Code: Get Product Type Code from Hotel Search Criteria.Product Type Code
-        - [ ] City Id: Get City Id from Hotel Search Criteria.City Id
+        - [ ] Agent Id: the corresponding Agent Id
+        - [ ] Corporate Id: the corresponding Corporate Id
+        - [ ] Product Type Code: the corresponding Product Type Code
+        - [ ] City Id: the corresponding City Id
     - [ ] Read Function Return
         - [ ] Tax Category Id
         - [ ] Tax Category Code
@@ -404,7 +402,7 @@ This specification is used to calculate price.
                 - [ ] Charge Type Id
                 - [ ] Charge Type Code
                 - [ ] Charge Type Name 
-### Calculate
+### Calculate Price
 - [ ] If Service Fee Rate is not empty
     - [ ] If Service Fee Included is true 
         - [ ] If Service Fee Rate.Percent is not empty
@@ -419,14 +417,18 @@ This specification is used to calculate price.
                 - [ ] Else
                     - [ ] Total Service Fee: Partner Total Price Exclude Tax * (Service Fee Rate.Percent/ 100)
         - [ ] Else If Service Fee Rate.Amount is not empty
-            - [ ] If Service Fee Rate.Charge Type.Code 25 (Per room)
-                - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount / Number of Staying Dates
-            - [ ] Else If Service Fee Rate.Charge Type.Code 26 (Per reservation/booking)
-                - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount / Number of Staying Dates / Number of Rooms
-            - [ ] Else If Service Fee Rate.Charge Type.Code 19 (Per room per night)
-                - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount
-            - [ ] Service Fee: Service Fee Amount Per Night
-            - [ ] Total Service Fee: Service Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+            - [ ] If Is Room Component is true
+                - [ ] If Service Fee Rate.Charge Type.Code 25 (Per room)
+                    - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount / Number of Staying Dates
+                - [ ] Else If Service Fee Rate.Charge Type.Code 26 (Per reservation/booking)
+                    - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount / Number of Staying Dates / Number of Rooms
+                - [ ] Else If Service Fee Rate.Charge Type.Code 19 (Per room per night)
+                    - [ ] Service Fee Amount Per Night: Service Fee Rate.Amount
+                - [ ] Service Fee: Service Fee Amount Per Night
+                - [ ] Total Service Fee: Service Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+            - [ ] Else
+                - [ ] Service Fee: 0 (already included in the room)
+                - [ ] Total Service Fee: 0 (already included in the room)
 - [ ] If Markup Rate is not empty
     - [ ] If Markup Rate.Percent is not empty
         - [ ] Markup:
@@ -440,14 +442,18 @@ This specification is used to calculate price.
             - [ ] Else
                 - [ ] Total Markup: Partner Total Price Exclude Tax * (Markup Rate.Percent/ 100)
     - [ ] Else If Markup Rate.Amount is not empty
-        - [ ] If Markup Rate.Charge Type.Code 25 (Per room)
-            - [ ] Markup Amount Per Night: Markup Rate.Amount / Number of Staying Dates
-        - [ ] Else If Markup Rate.Charge Type.Code 26 (Per reservation/booking)
-            - [ ] Markup Amount Per Night: Markup Rate.Amount / Number of Staying Dates / Number of Rooms
-        - [ ] Else If Markup Rate.Charge Type.Code 19 (Per room per night)
-            - [ ] Markup Amount Per Night: Markup Rate.Amount
-        - [ ] Markup: Markup Amount Per Night
-        - [ ] Total Markup: Markup Amount Per Night * Number of Staying Dates * Number of Rooms
+        - [ ] If Is Room Component is true
+            - [ ] If Markup Rate.Charge Type.Code 25 (Per room)
+                - [ ] Markup Amount Per Night: Markup Rate.Amount / Number of Staying Dates
+            - [ ] Else If Markup Rate.Charge Type.Code 26 (Per reservation/booking)
+                - [ ] Markup Amount Per Night: Markup Rate.Amount / Number of Staying Dates / Number of Rooms
+            - [ ] Else If Markup Rate.Charge Type.Code 19 (Per room per night)
+                - [ ] Markup Amount Per Night: Markup Rate.Amount
+            - [ ] Markup: Markup Amount Per Night
+            - [ ] Total Markup: Markup Amount Per Night * Number of Staying Dates * Number of Rooms
+        - [ ] Else  
+            - [ ] Markup: 0 (already included in the room)
+            - [ ] Total Markup: 0 (already included in the room)
 - [ ] If Processing Fee Rate is not empty
     - [ ] Processing Fee:
         - [ ] Get Processing Fee Rate (from function Check Processing Fee) where Fee Tax Type.Fee Tax Type Code is 25 (Processing Fee)
@@ -465,14 +471,18 @@ This specification is used to calculate price.
                         - [ ] Else
                             - [ ] Total Processing Fee: Partner Total Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else if Processing Fee Rate.Amount is not empty
-                    - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
-                        - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
-                    - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
-                        - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
-                    - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
-                        - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount      
-                    - [ ] Processing Fee: Processing Fee Amount Per Night
-                    - [ ] Total Processing Fee: Processing Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] If Is Room Component is true
+                        - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
+                            - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
+                        - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
+                            - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
+                        - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
+                            - [ ] Processing Fee Amount Per Night: Processing Fee Rate.Amount      
+                        - [ ] Processing Fee: Processing Fee Amount Per Night
+                        - [ ] Total Processing Fee: Processing Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] Else
+                        - [ ] Processing Fee: 0 (already included in the room)
+                        - [ ] Total Processing Fee: 0 (already included in the room)
     - [ ] After Office Charge:
         - [ ] Conditional:
             - [ ] For TC Assist or TC Instant Booking
@@ -504,14 +514,18 @@ This specification is used to calculate price.
                         - [ ] Else
                             - [ ] Total After Office Charge: Partner Total Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else if Processing Fee Rate.Amount is not empty
-                    - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
-                        - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
-                    - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
-                        - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
-                    - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
-                        - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount
-                    - [ ] After Office Charge: After Office Charge Amount Per Night
-                    - [ ] Total After Office Charge: After Office Charge Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] If Is Room Component is true
+                        - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
+                            - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
+                        - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
+                            - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
+                        - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
+                            - [ ] After Office Charge Amount Per Night: Processing Fee Rate.Amount
+                        - [ ] After Office Charge: After Office Charge Amount Per Night
+                        - [ ] Total After Office Charge: After Office Charge Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] Else
+                        - [ ] After Office Charge: 0 (already included in the room)
+                        - [ ] Total After Office Charge: 0 (already included in the room)
     - [ ] MDR Fee:
 		- [ ] Conditional:
 			- [ ] For Payment with Credit Card (Add MDR fee when payment with credit card or remove MDR fee when payment with other methods)
@@ -530,14 +544,18 @@ This specification is used to calculate price.
                         - [ ] Else
                             - [ ] Total MDR Fee: Partner Total Price Exclude Tax * (Processing Fee Rate.Percent/ 100)
                 - [ ] Else If Processing Fee Rate.Amount is not empty
-                    - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
-                        - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
-                    - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
-                        - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
-                    - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
-                        - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount
-                    - [ ] MDR Fee: MDR Fee Amount Per Night
-                    - [ ] Total MDR Fee: MDR Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] If Is Room Component is true
+                        - [ ] If Processing Fee Rate.Charge Type.Code 25 (Per room)
+                            - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates
+                        - [ ] Else If Processing Fee Rates.Charge Type.Code 26 (Per reservation/booking)
+                            - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount / Number of Staying Dates / Number of Rooms
+                        - [ ] Else If Processing Fee Rate.Charge Type.Code 19 (Per room per night)
+                            - [ ] MDR Fee Amount Per Night: Processing Fee Rate.Amount
+                        - [ ] MDR Fee: MDR Fee Amount Per Night
+                        - [ ] Total MDR Fee: MDR Fee Amount Per Night * Number of Staying Dates * Number of Rooms
+                    - [ ] Else
+                        - [ ] MDR Fee: 0 (already included in the room)
+                        - [ ] Total MDR Fee: 0 (already included in the room)
 	- [ ] Reissue Processing Fee
 		- [ ] Conditional:
 			- [ ] For Change Booking

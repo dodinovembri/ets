@@ -1,0 +1,239 @@
+# Replace
+- [ ] TableName
+- [ ] Condition
+    - [ ] Button: based on User or User Type Capability to Add TableName (ex. Employee)
+- [ ] ComponentName
+- [ ] LabelName
+- [ ] QueryPath
+- [ ] MinimumNumber
+- [ ] MaximumNumber
+- [ ] ColumnName
+- [ ] StartWeek
+- [ ] MinimumDate
+- [ ] MaximumDate
+- [ ] TextName
+- [ ] IconName
+- [ ] PageName
+- [ ] PlaceholderText
+- [ ] DestinationPage
+# Data Source Template
+- Data Source
+    - Select from table TableName
+        - Join table TableName
+        - Join table TableName
+    - Where TableName = Condition
+        and table TableName.Status is not 0 (deleted)
+- Additional Data Source (and complete the relations accordingly):
+    - Table TableName where TableName.Status is not 0 (deleted)
+- Order by TableName.ColumnName
+# Component
+## Input Component
+- ComponentName
+    - [ ] Element: Input
+        - Appearance
+			- [ ] Label: "LabelName"
+            - [ ] Placeholder: "PlaceholderText"
+            - [ ] Icon: IconName
+            - [ ] This element is disabled: no
+			- [ ] Initial content: empty/ QueryPath
+			- [ ] Content format: Text/ Phone/ NPWP/ Email/
+				- [ ] Text
+					- [ ] Limit the number of characters: yes
+						- [ ] Minimum number: MinimumNumber
+						- [ ] Maximum number: MaximumNumber
+			- [ ] This input is mandatory: yes
+				- [ ] When this input's value is empty, show message "ComponentName is required." 
+			- [ ] This element is visible on page load: yes
+- ComponentName
+    - [ ] Element: Textarea/ Textarea Editor
+        - Appearance
+			- [ ] Label: "LabelName"
+			- [ ] Initial content: empty/ QueryPath
+			- [ ] Content format: Text
+				- [ ] Text
+					- [ ] Limit the number of characters: yes
+						- [ ] Minimum number: MinimumNumber
+						- [ ] Maximum number: MaximumNumber
+			- [ ] This input is mandatory: no
+			- [ ] This element is visible on page load: yes
+- ComponentName
+    - [ ] Element: Image Uploader
+        - Appearance
+            - [ ] Label: "LabelName"
+            - [ ] Initial value: NULL
+			- [ ] This input is mandatory: no
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] Supported file extension: .png, .jpg, .jpeg, other than that show message "Only .png, .jpg, .jpeg file supported"
+				- [ ] Remove the selected file in file upload        
+- ComponentName
+    - [ ] Element: Select
+        - Appearance
+			- [ ] Label: "LabelName"
+			- [ ] Placeholder: "Please choose"
+			- [ ] Initial value: QueryPath
+			- [ ] Text: TableName.ColumnName
+			- [ ] Selections: [{All Active TableName sort by ColumnName ASC}]       
+			- [ ] This input is mandatory: yes 
+				- [ ] When this input's value is empty, show message "ComponentName is required."   
+			- [ ] This element is visible on page load: yes   
+- ComponentName
+    - [ ] Element: Date Input Group (Date, Month, Year)
+        - Appearance
+			- [ ] Label: "LabelName"
+			- [ ] Input type: Date
+			- [ ] Initial content: empty/ QueryPath
+			- [ ] Start the week on StartWeek
+			- [ ] Minimum date: MinimumDate | 100 years backwards
+			- [ ] Maximum date: MaximumDate | 100 years forwards
+			- [ ] This input is disabled: no
+			- [ ] This input is mandatory: yes 
+                - [ ] When this input's value is empty, show message "ComponentName is required."   
+			- [ ] This element is visible on page load: yes
+- ComponentName
+    - [ ] Element: Radio Button
+        - Appearance
+			- [ ] Label: "LabelName"
+			- [ ] Initial value: empty/ QueryPath
+			- [ ] Text: TableName.ColumnName
+            - [ ] Selections: [{All Active TableName sort by Sort ASC}]			
+			- [ ] This input is mandatory: yes
+                - [ ] When this input's value is empty, show message "ComponentName is required."   
+			- [ ] This element is visible on page load: yes  
+- ComponentName
+    - [ ] Element: Checkbox
+        - Appearance
+			- [ ] Label: "LabelName"
+            - [ ] Text: QueryPath
+            - [ ] Initial content: empty/ QueryPath
+			- [ ] This input is mandatory: no 
+			- [ ] This element is visible on page load: yes                                               
+- Component Name
+    - [ ] Element: Button
+		- Appearance
+            - [ ] Icon IconName
+			- [ ] Text: "TextName"
+			- [ ] This element is disabled: yes, if data invalid
+			- [ ] This element is visible on page load: conditional, based on Condition
+- Component Name
+    - [ ] Element: Link
+        - Appearance
+            - [ ] Icon IconName
+            - [ ] Text: TextName
+            - [ ] Destination page: DestinationPage
+            - [ ] Open in a new tab: no
+				- [ ] Tooltip text (on hover): "Click to TextName"
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] When this Link is clicked: open PageName page
+## View Component
+- ComponentName
+    - [ ] Element: Text
+        - Appearance
+            - [ ] Label: "LableName"
+			- [ ] Text: QueryPath
+			- [ ] This element is visible on page load: yes
+- ComponentName
+    - [ ] Element: Image
+        - Appearance
+            - [ ] Image: QueryPath (add folder structure based on config file)
+			- [ ] This element is visible on page load: yes
+- ComponentName
+	- [ ] Element: Tab
+		- Appearance
+			- [ ] Tab: ["TabName", "TabName"]
+			- [ ] This element is visible on page load: yes
+		- Conditional
+			- [ ] When User click "TabName": 
+				- [ ] Tab Selected: TabName
+				- [ ] See TabName           
+- Component Name
+    - [ ] Element: List
+        - Appearance
+            - [ ] 
+            - [ ] 
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] 
+            - [ ] 
+- Component Name
+    - [ ] Element: Block & Inline
+        - Appearance
+            - [ ] 
+            - [ ] 
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] 
+            - [ ] 
+- Component Name
+    - [ ] Element: Quotation
+        - Appearance
+            - [ ] 
+            - [ ] 
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] 
+            - [ ] 
+- Component Name
+    - [ ] Element: Iframe
+        - Appearance
+            - [ ] 
+            - [ ] 
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] 
+            - [ ] 
+- Component Name
+    - [ ] Element: Form
+        - Appearance
+            - [ ] 
+            - [ ] 
+            - [ ] This element is visible on page load: yes
+        - Conditional
+            - [ ] 
+            - [ ] 
+## Table Configuration
+- Table Name
+    - [ ] Element: Table
+        - Appearance
+			- [ ] Rows: 10 (based on paging configuration)
+			- [ ] This element is visible on page load: conditional, if there are any records
+			- [ ] Content: see TableName
+- Paging Configuration
+	- [ ] Element: Select
+		- Appearance
+			- [ ] Values: 10, 25, 50, 100, All
+			- [ ] This element is visible on page load: conditional, if there are any records
+		- Conditional
+			- [ ] When the select value is changed, reload rows by the selected number of rows per page.
+	- [ ] Element: Text
+		- Appearance
+			- [ ] Text: "Showing {Start Row Number} - {End Row Number} of {Total Rows}"
+			- [ ] This element is visible on page load: conditional, if there are any records
+- Pagination
+	- [ ] Element: Link
+		- Appearance
+			- [ ] Text: "Previous icon {Previous Page} {Page Numbers} {Next Page} Next icon"
+			- [ ] This element is visible on page load: conditional, if there are any records
+		- Conditional
+			- [ ] Text is loaded based on total pages available.
+			- [ ] When user click the previous link, page number link, or next link: load the related rows.
+- No Records
+	- [ ] Element: Text
+		- Appearance
+			- [ ] Text: "No TableName found"
+			- [ ] This element is visible on page load: conditional, if there are no records
+- Sort Header Table
+    - [ ] When this Link is clicked: Sort by ColumnName ASC/ DESC with icon indicator after the column's name and remove all other column's icon if exist
+
+{Image based on Employee Asset.Multimedia Description.File Name where Multimedia Description.Picture Category.Code = 1001 (User Profile)} (add folder structure based on config file)
+## Checbox Day
+    - [ ] Element: Checkbox
+        - Appearance
+			- [ ] Label: LabelName
+			- [ ] Selection: [{Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}]
+			- [ ] Text: {Monday: Mon, Tuesday: Tue, Wednesday: Wed, Thursday: Thu, Friday: Fri, Saturday: Sat, Sunday: Sun}
+			- [ ] This input is mandatory: yes, at least one after office hours selected
+				- [ ] When this input's value is empty, show message "After office hours is required" 
+			- [ ] This element is visible on page load: yes
+***
