@@ -1,21 +1,3 @@
-# Replace
-- [ ] TableName
-- [ ] Condition
-    - [ ] Button: based on User or User Type Capability to Add TableName (ex. Employee)
-- [ ] ComponentName
-- [ ] LabelName
-- [ ] QueryPath
-- [ ] MinimumNumber
-- [ ] MaximumNumber
-- [ ] ColumnName
-- [ ] StartWeek
-- [ ] MinimumDate
-- [ ] MaximumDate
-- [ ] TextName
-- [ ] IconName
-- [ ] PageName
-- [ ] PlaceholderText
-- [ ] DestinationPage
 # Data Source Template
 - Data Source
     - Select from table TableName
@@ -28,7 +10,7 @@
 - Order by TableName.ColumnName
 # Component
 ## Input Component
-- ComponentName
+- ComponentInput
     - [ ] Element: Input
         - Appearance
 			- [ ] Label: "LabelName"
@@ -44,7 +26,7 @@
 			- [ ] This input is mandatory: yes
 				- [ ] When this input's value is empty, show message "ComponentName is required." 
 			- [ ] This element is visible on page load: yes
-- ComponentName
+- ComponentTextarea
     - [ ] Element: Textarea/ Textarea Editor
         - Appearance
 			- [ ] Label: "LabelName"
@@ -56,7 +38,7 @@
 						- [ ] Maximum number: MaximumNumber
 			- [ ] This input is mandatory: no
 			- [ ] This element is visible on page load: yes
-- ComponentName
+- ComponentImageUploader
     - [ ] Element: Image Uploader
         - Appearance
             - [ ] Label: "LabelName"
@@ -66,7 +48,7 @@
         - Conditional
             - [ ] Supported file extension: .png, .jpg, .jpeg, other than that show message "Only .png, .jpg, .jpeg file supported"
 				- [ ] Remove the selected file in file upload        
-- ComponentName
+- ComponentSelect
     - [ ] Element: Select
         - Appearance
 			- [ ] Label: "LabelName"
@@ -77,7 +59,7 @@
 			- [ ] This input is mandatory: yes 
 				- [ ] When this input's value is empty, show message "ComponentName is required."   
 			- [ ] This element is visible on page load: yes   
-- ComponentName
+- ComponentDate
     - [ ] Element: Date Input Group (Date, Month, Year)
         - Appearance
 			- [ ] Label: "LabelName"
@@ -90,7 +72,7 @@
 			- [ ] This input is mandatory: yes 
                 - [ ] When this input's value is empty, show message "ComponentName is required."   
 			- [ ] This element is visible on page load: yes
-- ComponentName
+- ComponentRadio
     - [ ] Element: Radio Button
         - Appearance
 			- [ ] Label: "LabelName"
@@ -100,7 +82,7 @@
 			- [ ] This input is mandatory: yes
                 - [ ] When this input's value is empty, show message "ComponentName is required."   
 			- [ ] This element is visible on page load: yes  
-- ComponentName
+- ComponentCheckbox
     - [ ] Element: Checkbox
         - Appearance
 			- [ ] Label: "LabelName"
@@ -108,14 +90,14 @@
             - [ ] Initial content: empty/ QueryPath
 			- [ ] This input is mandatory: no 
 			- [ ] This element is visible on page load: yes                                               
-- Component Name
+- ComponentButton
     - [ ] Element: Button
 		- Appearance
             - [ ] Icon IconName
 			- [ ] Text: "TextName"
 			- [ ] This element is disabled: yes, if data invalid
 			- [ ] This element is visible on page load: conditional, based on Condition
-- Component Name
+- ComponentLink
     - [ ] Element: Link
         - Appearance
             - [ ] Icon IconName
@@ -127,18 +109,18 @@
         - Conditional
             - [ ] When this Link is clicked: open PageName page
 ## View Component
-- ComponentName
+- ComponentText
     - [ ] Element: Text
         - Appearance
             - [ ] Label: "LableName"
 			- [ ] Text: QueryPath
 			- [ ] This element is visible on page load: yes
-- ComponentName
+- ComponentImage
     - [ ] Element: Image
         - Appearance
             - [ ] Image: QueryPath (add folder structure based on config file)
 			- [ ] This element is visible on page load: yes
-- ComponentName
+- ComponentTab
 	- [ ] Element: Tab
 		- Appearance
 			- [ ] Tab: ["TabName", "TabName"]
@@ -147,53 +129,8 @@
 			- [ ] When User click "TabName": 
 				- [ ] Tab Selected: TabName
 				- [ ] See TabName           
-- Component Name
-    - [ ] Element: List
-        - Appearance
-            - [ ] 
-            - [ ] 
-            - [ ] This element is visible on page load: yes
-        - Conditional
-            - [ ] 
-            - [ ] 
-- Component Name
-    - [ ] Element: Block & Inline
-        - Appearance
-            - [ ] 
-            - [ ] 
-            - [ ] This element is visible on page load: yes
-        - Conditional
-            - [ ] 
-            - [ ] 
-- Component Name
-    - [ ] Element: Quotation
-        - Appearance
-            - [ ] 
-            - [ ] 
-            - [ ] This element is visible on page load: yes
-        - Conditional
-            - [ ] 
-            - [ ] 
-- Component Name
-    - [ ] Element: Iframe
-        - Appearance
-            - [ ] 
-            - [ ] 
-            - [ ] This element is visible on page load: yes
-        - Conditional
-            - [ ] 
-            - [ ] 
-- Component Name
-    - [ ] Element: Form
-        - Appearance
-            - [ ] 
-            - [ ] 
-            - [ ] This element is visible on page load: yes
-        - Conditional
-            - [ ] 
-            - [ ] 
 ## Table Configuration
-- Table Name
+- TableName
     - [ ] Element: Table
         - Appearance
 			- [ ] Rows: 10 (based on paging configuration)
@@ -225,8 +162,6 @@
 			- [ ] This element is visible on page load: conditional, if there are no records
 - Sort Header Table
     - [ ] When this Link is clicked: Sort by ColumnName ASC/ DESC with icon indicator after the column's name and remove all other column's icon if exist
-
-{Image based on Employee Asset.Multimedia Description.File Name where Multimedia Description.Picture Category.Code = 1001 (User Profile)} (add folder structure based on config file)
 ## Checbox Day
     - [ ] Element: Checkbox
         - Appearance
